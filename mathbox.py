@@ -36,20 +36,23 @@ print(filename)
 
 # use input CSV filepath to ingest CSV contents into dataframe
 
-mb = pd.read_csv(filename, index_col=0)
+df = pd.read_csv(filename, index_col=0)
+
+# clean dataframe and remove n/a values
+
+mb = df.dropna()
 
 # debug print dataframe contents
 
 print(mb)
 
 sleep(1)
-
 clear()
 
 mbMean = mb.mean(axis=1)
 
 print('Data Frame Statistics:\n')
-
 sleep(1)
 
+print(mb.info())
 print(mbMean)
