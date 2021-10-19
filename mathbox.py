@@ -15,6 +15,9 @@ def clear():
     else:
         _ = system('clear')
 
+# create value for numeric table
+
+numerical = 1
 
 # create a tkinter dialogue to select a CSV file, and limit filetypes
 # uses user home directory for initial file dialog
@@ -34,13 +37,18 @@ filename = fd.askopenfilename(
 
 print(filename)
 
+numerical = input('Is this dataset 100% Numeric?\n(Input 1 for Yes): ')
+
 # use input CSV filepath to ingest CSV contents into dataframe
 
 df = pd.read_csv(filename, index_col=0)
 
-# clean dataframe and remove n/a values
+# check for data type/clean dataframe and remove NaN values
 
-mb = df.dropna()
+if numerical == 1:
+    mb = df.dropna()
+else:
+    mb = df
 
 # debug print dataframe contents
 
@@ -49,7 +57,7 @@ print(mb)
 sleep(1)
 clear()
 
-mbMean = mb.mean(axis=1)
+mbMean = mb.mean(axis=0)
 
 print('Data Frame Statistics:\n')
 sleep(1)
